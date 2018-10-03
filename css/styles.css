@@ -274,6 +274,11 @@ nav h1 a {
   position: relative;
   width: 85%;
 }
+@media screen and (max-width: 400px) {
+  #reviews-container {
+    width: 40%;
+  }
+}
 #reviews-list li p {
   margin: 0 0 10px;
 }
