@@ -220,6 +220,6 @@ if('serviceWorker' in navigator) {
               console.log("Service Worker Registered");
             })
             .catch(error => {
-              console.log("Service Worker FAILED to REGISTER with" + (error));
+              console.log(error);
             });
 }

@@ -1,4 +1,4 @@
-const staticCacheName = 'restaurant-cache-v32';
+const staticCacheName = 'v1';
 
 let cacheFiles = [
   '/img/1.jpg',
@@ -25,17 +25,19 @@ let cacheFiles = [
 self.addEventListener('install', event => {
 	console.log('[ServiceWorker] Installed');
 	event.waitUntil(
-		caches.open(cacheName).then(cache = > {
+		caches.open(staticCacheName).then(cache = > {
+			console.log('[ServiceWorker] caching cache files');
 			return cache.addAll(cacheFiles);
 		})
-		.catch(err => {
-			console.log('[ServiceWorker] Caching Error');
+		.catch(error => {
+			console.log('[ServiceWorker] Caching Error' + error);
 		})
 		);
 });
 
 // Clear cache
 self.addEventListener('activate' , event => {
+	console.log('[ServiceWorker] Activated');
 	event.waitUntil(caches.keys().then(cacheNames => {
 		return Promise.all(
 			cacheNames.filter(cacheName = > {
@@ -52,22 +54,24 @@ self.addEventListener('activate' , event => {
 self.addEventListener('fetch', e => {
 	e.respondWith(caches.match(e.request).then(response => {
 		if (response) {
-			console.log(e.request + 'found in cache');
+			console.log(e.request.url + 'found in cache');
 			return response;
 		}
-		else {
-			console.log(e.request + 'was not found in cache');
-			return fetch(e.request).then(response => {
-				const clonedResponse = response.clone();
-				caches.open('restaurant-cache-v32').then(cache => {
-					cache.put(e.request, response);
-				})
+		let requestClone = e.request.clone();
+		return fetch(requestClone).then(response => {
+			if (!response) {
+				console.log('[ServiceWorker] Fetch had no response');
+				return response;
+			}
+			let responseClone = response.clone();
+			return caches.open(staticCacheName).then(cache => {
+				cache.put(e.request, responseClone);
 				return response;
 			})
-			.catch(err => {
-				console.log.error(err);
-			});
-		}
+			.catch(error => {
+				console.log('[ServiceWorker] Error occured during fetch and cache');
+			})
+		})
 	})
 	);
 });
