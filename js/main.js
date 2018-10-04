@@ -1,8 +1,9 @@
 let restaurants,
   neighborhoods,
-  cuisines
-var newMap
-var markers = []
+  cuisines;
+var newMap;
+var markers = [];
+
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
@@ -209,3 +210,16 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   });
 } */
 
+// Establish service worker
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker
+            .register('sw.js', {
+              scope: ''
+            })
+            .then(reg => {
+              console.log("Service Worker Registered");
+            })
+            .catch(error => {
+              console.log("Service Worker FAILED to REGISTER with" + (error));
+            });
+}
