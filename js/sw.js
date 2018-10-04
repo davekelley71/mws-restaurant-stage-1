@@ -23,16 +23,17 @@ let cacheFiles = [
 
 // cache files
 self.addEventListener('install', event => {
-	console.log('[ServiceWorker] Installed');
+	console.log('[ServiceWorker] installed');
 	event.waitUntil(
-		caches.open(staticCacheName).then(cache = > {
-			console.log('[ServiceWorker] caching cache files');
+		caches.open(staticCacheName)
+		.then(cache => {
+			console.log('[ServiceWorker] cache files');
 			return cache.addAll(cacheFiles);
 		})
 		.catch(error => {
-			console.log('[ServiceWorker] Caching Error' + error);
+			console.log('[ServiceWorker] Error during caching' + error);
 		})
-		);
+	);
 });
 
 // Clear cache
