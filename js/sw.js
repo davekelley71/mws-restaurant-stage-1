@@ -31,7 +31,7 @@ self.addEventListener('install', event => {
 			return cache.addAll(cacheFiles);
 		})
 		.catch(error => {
-			console.log('[ServiceWorker] Error during caching' + error);
+			console.log('[ServiceWorker] Error during caching' + (error));
 		})
 	);
 });
@@ -41,7 +41,7 @@ self.addEventListener('activate' , event => {
 	console.log('[ServiceWorker] Activated');
 	event.waitUntil(caches.keys().then(cacheNames => {
 		return Promise.all(
-			cacheNames.filter(cacheName = > {
+			cacheNames.filter(cacheName => {
 				return cacheName.startsWith('restaurant') && cacheName != staticCacheName;
 			}).map(cacheName => {
 				return caches.delete(cacheName);
