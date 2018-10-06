@@ -249,7 +249,7 @@ nav h1 a {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
   padding: 140px 40px 30px;
-  width: 40%;
+  width: 50%;
 }
 #reviews-container {
   padding: 30px 40px 80px;
@@ -284,4 +284,18 @@ nav h1 a {
   color: #666;
 }
 
-
+/* mobile */
+@media screen and (max-width: 370px) {
+  #restaurant-container, #reviews-container, #restaurant-content, #restaurant-list {
+    width: 50%;
+    padding: 140px 20px 30px 0;
+    align-items: center;
+  }
+  #restaurant-img {
+    width: 100%;
+  }
+  #restaurant-hours, #restaurant-address {
+    padding-right: 40px;
+    max-width: 
+  }
+}
