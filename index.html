@@ -26,10 +26,10 @@
       <div class="filter-options">
         <h2>Filter Results</h2>
         <select role = "menu" aria-label = "Select Neighborhood" id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
-          <option value="all">All Neighborhoods</option>
+          <option class = "filter" role = "Select Neighborhood" value="all">All Neighborhoods</option>
         </select>
         <select role = "menu" aria-label = "Select Cuisine" id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
-          <option roll = "Select Cuisine" value="all">All Cuisines</option>
+          <option class = "filter" roll = "Select Cuisine" value="all">All Cuisines</option>
         </select>
       </div>
       <ul role = "tablist" id="restaurants-list"></ul>
