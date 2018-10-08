@@ -53,7 +53,7 @@ self.addEventListener('activate' , event => {
 
 // Fetch cached assests
 self.addEventListener('fetch', e => {
-	e.respondWith(caches.match(e.request).then(response => {
+	e.respondWith(caches.match(e.request, ignoreSearch=true).then(response => {
 		if (response) {
 			console.log(e.request.url + 'found in cache');
 			return response;
